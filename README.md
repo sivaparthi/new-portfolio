@@ -78,7 +78,10 @@ Then in the dashboard add the custom domain (`psiv.dev` and `www.psiv.dev`) the 
 
 - [public/_headers](public/_headers) — security headers + immutable cache for hashed assets
 - [public/_redirects](public/_redirects) — SPA fallback (`/* → /index.html 200`)
-- [wrangler.toml](wrangler.toml) — only needed if you deploy via the Wrangler CLI
+
+> Do **not** add a `wrangler.toml` at the repo root — if Pages sees it, it tries
+> to run `wrangler deploy` (Workers flow) and the build fails. Pages reads its
+> build command and output directory from the dashboard.
 
 ### DNS notes
 
