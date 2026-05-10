@@ -1,0 +1,7 @@
+# Optional: deploy directly from your machine with Wrangler.
+# Most people will instead use the Cloudflare dashboard (Git-based deploy).
+# See README.md for both flows.
+
+name = "psiv-dev"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "dist"
