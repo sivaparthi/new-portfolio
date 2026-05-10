@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { experiences } from '../data/content.js';
 import SectionHeading from './SectionHeading.jsx';
+import CompanyLogo from './CompanyLogo.jsx';
 
 export default function Experience() {
   return (
@@ -26,12 +27,15 @@ export default function Experience() {
               <div className="timeline__dot" aria-hidden="true" />
               <div className="timeline__card">
                 <div className="timeline__head">
-                  <div>
-                    {exp.featured && (
-                      <span className="timeline__badge">Current role</span>
-                    )}
-                    <h3 className="timeline__role">{exp.role}</h3>
-                    <p className="timeline__company">{exp.company}</p>
+                  <div className="timeline__head-left">
+                    <CompanyLogo company={exp.company} />
+                    <div>
+                      {exp.featured && (
+                        <span className="timeline__badge">Current role</span>
+                      )}
+                      <h3 className="timeline__role">{exp.role}</h3>
+                      <p className="timeline__company">{exp.company}</p>
+                    </div>
                   </div>
                   <span className="timeline__period">{exp.period}</span>
                 </div>

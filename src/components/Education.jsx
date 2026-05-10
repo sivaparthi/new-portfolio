@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { education } from '../data/content.js';
 import SectionHeading from './SectionHeading.jsx';
+import CompanyLogo from './CompanyLogo.jsx';
 
 export default function Education() {
   return (
@@ -23,8 +24,13 @@ export default function Education() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
             >
-              <h3 className="edu-card__school">{e.school}</h3>
-              <p className="edu-card__degree">{e.degree}</p>
+              <div className="edu-card__head">
+                <CompanyLogo company={e.school} />
+                <div>
+                  <h3 className="edu-card__school">{e.school}</h3>
+                  <p className="edu-card__degree">{e.degree}</p>
+                </div>
+              </div>
               <p className="edu-card__period">{e.period}</p>
               <p className="edu-card__desc">{e.description}</p>
             </motion.article>
