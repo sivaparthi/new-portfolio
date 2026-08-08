@@ -49,49 +49,38 @@ function IbmMark({ size = 28 }) {
 /**
  * Resolves a company name to a logo configuration.
  *  - `Component`: React node to render
- *  - `bg`: subtle background tint for the badge wrapper
+ *  - `tone`: modifier class that supplies a theme-aware tint
  *  - `initials`: fallback when no branded mark is available
  */
 function resolveLogo(company) {
   const name = company.toLowerCase();
 
   if (name.includes('microsoft')) {
-    return { Component: <MicrosoftMark />, bg: 'rgba(0, 164, 239, 0.10)' };
+    return { Component: <MicrosoftMark />, tone: 'brand' };
   }
   if (name === 'ibm' || name.startsWith('ibm ')) {
-    return {
-      Component: <IbmMark />,
-      bg: 'rgba(31, 112, 193, 0.10)',
-    };
+    return { Component: <IbmMark />, tone: 'brand' };
   }
   if (name.includes('thoughtclan')) {
-    return { initials: 'TC', bg: 'rgba(34, 211, 238, 0.12)', color: '#22d3ee' };
+    return { initials: 'TC', tone: 'cyan' };
   }
   if (name.includes('navriti')) {
-    return { initials: 'N', bg: 'rgba(255, 159, 64, 0.12)', color: '#ff9f40' };
+    return { initials: 'N', tone: 'amber' };
   }
   if (name.includes('national institute of technology')) {
-    return { initials: 'NIT', bg: 'rgba(167, 139, 250, 0.14)', color: '#a78bfa' };
+    return { initials: 'NIT', tone: 'violet' };
   }
   if (name.includes('coimbatore institute')) {
-    return { initials: 'CIT', bg: 'rgba(124, 92, 255, 0.14)', color: '#bda7ff' };
+    return { initials: 'CIT', tone: 'indigo' };
   }
   // Generic fallback — first two letters of the company.
-  return {
-    initials: company.slice(0, 2).toUpperCase(),
-    bg: 'rgba(124, 92, 255, 0.14)',
-    color: '#bda7ff',
-  };
+  return { initials: company.slice(0, 2).toUpperCase(), tone: 'indigo' };
 }
 
 export default function CompanyLogo({ company }) {
   const logo = resolveLogo(company);
   return (
-    <span
-      className="company-logo"
-      style={{ background: logo.bg, color: logo.color || 'inherit' }}
-      aria-hidden="true"
-    >
+    <span className={`company-logo company-logo--${logo.tone}`} aria-hidden="true">
       {logo.Component ? logo.Component : <span className="company-logo__initials">{logo.initials}</span>}
     </span>
   );

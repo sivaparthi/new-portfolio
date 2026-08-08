@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'siva-portfolio:theme';
+// Bumped on the light-theme redesign so returning visitors get the new default.
+const STORAGE_KEY = 'siva-portfolio:theme:v2';
 
 function getInitialTheme() {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
   } catch {
     /* ignore */
   }
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    return 'light';
-  }
-  return 'dark';
+  return 'light';
 }
 
 export default function useTheme() {
