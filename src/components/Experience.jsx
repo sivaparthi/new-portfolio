@@ -14,34 +14,36 @@ export default function Experience() {
           subtitle="Companies I have built and shipped with."
         />
 
-        <ol className="timeline">
+        <ol className="xp">
           {experiences.map((exp, i) => (
             <motion.li
               key={`${exp.company}-${exp.period}`}
-              className={`timeline__item ${exp.featured ? 'timeline__item--featured' : ''}`}
+              className={`xp__item ${exp.featured ? 'xp__item--featured' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: i * 0.05, ease: 'easeOut' }}
+              transition={{ duration: 0.55, delay: i * 0.04, ease: 'easeOut' }}
             >
-              <div className="timeline__dot" aria-hidden="true" />
-              <div className="timeline__card">
-                <div className="timeline__head">
-                  <div className="timeline__head-left">
-                    <CompanyLogo company={exp.company} />
-                    <div>
-                      {exp.featured && (
-                        <span className="timeline__badge">Current role</span>
-                      )}
-                      <h3 className="timeline__role">{exp.role}</h3>
-                      <p className="timeline__company">{exp.company}</p>
-                    </div>
+              <div className="xp__rail" aria-hidden="true">
+                <span className="xp__node" />
+                <span className="xp__period">{exp.period}</span>
+              </div>
+
+              <div className="xp__card">
+                <div className="xp__head">
+                  <CompanyLogo company={exp.company} />
+                  <div className="xp__head-text">
+                    {exp.featured && <span className="xp__badge">Current role</span>}
+                    <h3 className="xp__role">{exp.role}</h3>
+                    <p className="xp__company">{exp.company}</p>
+                    <p className="xp__period-inline">{exp.period}</p>
                   </div>
-                  <span className="timeline__period">{exp.period}</span>
                 </div>
-                {exp.summary && <p className="timeline__summary">{exp.summary}</p>}
+
+                {exp.summary && <p className="xp__summary">{exp.summary}</p>}
+
                 {exp.bullets.length > 0 && (
-                  <ul className="timeline__bullets">
+                  <ul className="xp__bullets">
                     {exp.bullets.map((b) => (
                       <li key={b}>{b}</li>
                     ))}

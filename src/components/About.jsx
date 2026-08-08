@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiZap } from 'react-icons/fi';
 import { highlights } from '../data/content.js';
 import SectionHeading from './SectionHeading.jsx';
 
@@ -14,20 +13,20 @@ export default function About() {
           subtitle="Designing scalable solutions, driving automation."
         />
 
-        <ul className="about__list">
+        <ul className="rail-list">
           {highlights.map((item, i) => (
             <motion.li
               key={item}
-              initial={{ opacity: 0, y: 16 }}
+              className="rail-item"
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: i * 0.04, ease: 'easeOut' }}
-              className="about__item"
+              viewport={{ once: true, margin: '-70px' }}
+              transition={{ duration: 0.45, delay: (i % 5) * 0.05, ease: 'easeOut' }}
             >
-              <span className="about__icon">
-                <FiZap />
+              <span className="rail-item__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
               </span>
-              <span>{item}</span>
+              <span className="rail-item__text">{item}</span>
             </motion.li>
           ))}
         </ul>

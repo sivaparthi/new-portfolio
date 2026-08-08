@@ -15,26 +15,34 @@ export default function Contact() {
         />
 
         <motion.div
-          className="contact-card"
+          className="cta"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <p className="contact-card__lead">
-            Got a project in mind, an idea to bounce around, or just want to say hi?
-            My inbox is always open.
-          </p>
+          <div>
+            <p className="cta__lead">
+              Got a project in mind, an idea to bounce around, or just want to say hi?
+              My inbox is always open.
+            </p>
+            <a className="cta__email" href={`mailto:${profile.email}`}>
+              {profile.email}
+            </a>
+          </div>
 
-          <a className="contact-card__email" href={`mailto:${profile.email}`}>
-            {profile.email}
-          </a>
-
-          <div className="contact-card__socials">
-            <a href={profile.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+          <div className="cta__socials">
+            <a
+              className="icon-link"
+              href={profile.socials.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+            >
               <FiGithub />
             </a>
             <a
+              className="icon-link"
               href={profile.socials.linkedin}
               target="_blank"
               rel="noreferrer"
@@ -42,7 +50,7 @@ export default function Contact() {
             >
               <FiLinkedin />
             </a>
-            <a href={profile.socials.email} aria-label="Email">
+            <a className="icon-link" href={profile.socials.email} aria-label="Email">
               <FiMail />
             </a>
           </div>

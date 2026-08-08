@@ -62,19 +62,19 @@ function resolveLogo(company) {
     return { Component: <IbmMark />, tone: 'brand' };
   }
   if (name.includes('thoughtclan')) {
-    return { initials: 'TC', tone: 'cyan' };
+    return { initials: 'TC', tone: 'sage' };
   }
   if (name.includes('navriti')) {
-    return { initials: 'N', tone: 'amber' };
+    return { initials: 'N', tone: 'sand' };
   }
   if (name.includes('national institute of technology')) {
-    return { initials: 'NIT', tone: 'violet' };
+    return { initials: 'NIT', tone: 'slate' };
   }
   if (name.includes('coimbatore institute')) {
-    return { initials: 'CIT', tone: 'indigo' };
+    return { initials: 'CIT', tone: 'ember' };
   }
   // Generic fallback — first two letters of the company.
-  return { initials: company.slice(0, 2).toUpperCase(), tone: 'indigo' };
+  return { initials: company.slice(0, 2).toUpperCase(), tone: 'ember' };
 }
 
 export default function CompanyLogo({ company }) {
