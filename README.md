@@ -44,26 +44,31 @@ src/
 - **Theme tokens (colours, radii, fonts)** → CSS variables at the top of
   `src/styles/index.css`
 
-## Deploy to Cloudflare Pages (psiv.dev)
+## CI/CD and Cloudflare Pages (psiv.dev)
 
-This project is set up for Cloudflare Pages. There are two flows — pick one.
+The GitHub Actions workflow in [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml):
 
-### Option A — Git-based deploy (recommended)
+- runs a clean install and production build for every pull request;
+- repeats that check for pushes to `main`; and
+- deploys successful `main` builds to the `psiv-dev` Cloudflare Pages project.
 
-1. Push this repo to GitHub (or GitLab / Bitbucket).
-2. In the Cloudflare dashboard, go to **Workers & Pages → Create → Pages → Connect to Git**.
-3. Select the repo and use these build settings:
-   - **Framework preset:** Vite
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node version:** `20` (set `NODE_VERSION=20` in Environment variables if needed)
-4. Click **Save and Deploy**. You'll get a temporary `*.pages.dev` URL.
-5. Open the project → **Custom domains → Set up a custom domain** → enter `psiv.dev`,
+### GitHub setup
+
+1. In Cloudflare, create an API token with **Account → Cloudflare Pages → Edit**
+   permission for the account that owns the Pages project.
+2. In GitHub, open **Settings → Secrets and variables → Actions** and add these
+   repository secrets:
+   - `CLOUDFLARE_API_TOKEN` — the token created above
+   - `CLOUDFLARE_ACCOUNT_ID` — the account ID shown in the Cloudflare dashboard
+3. Push to `main`. The workflow builds the site and uploads `dist` to Cloudflare Pages.
+4. Open the Pages project → **Custom domains → Set up a custom domain** → enter `psiv.dev`,
    then repeat for `www.psiv.dev`. Because the domain is already on Cloudflare,
    the required DNS records (`CNAME` to your Pages project) are added automatically.
-6. Every push to your default branch redeploys; PRs get preview URLs for free.
 
-### Option B — Direct upload with Wrangler
+Do not also connect this repository through Cloudflare's Git integration unless you
+want two deployments for every push to `main`.
+
+### Manual deployment with Wrangler
 
 ```powershell
 npm install -g wrangler
